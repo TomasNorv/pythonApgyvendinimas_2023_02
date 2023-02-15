@@ -11,8 +11,11 @@ class Objektas(models.Model):
     housenumber = models.CharField(verbose_name='Namo numeris', max_length=100)
     rooms = models.CharField(verbose_name="Kambariai", max_length=3)
     area = models.CharField(verbose_name='Plotas m2', max_length=10)
+    max_guest = models.CharField(verbose_name= 'Maks. svečiai', max_length= 10)
     summary = models.TextField(verbose_name='Aprašymas', max_length= 5000)
     amenities = models.TextField(verbose_name="Patogumai", max_length=5000)
+
+
 
     def __str__(self):
         return self.caption
