@@ -18,8 +18,8 @@ def skelbimai(request):
     }
     return render(request, 'skelbimai.html', context=context)
 
-def skelbimas(request, skelbimo_id):
-    skelbimas = get_object_or_404(Objektas, pk = skelbimo_id)
+def skelbimas(request, skelbimas_id):
+    skelbimas = get_object_or_404(Objektas, pk = skelbimas_id)
     context = {
         'skelbimas': skelbimas
     }

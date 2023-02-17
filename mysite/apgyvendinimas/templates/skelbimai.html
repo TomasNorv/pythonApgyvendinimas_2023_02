@@ -7,7 +7,7 @@
   <p><b>Objektų sąrašas :</b></p>
   {% for skelbimas in skelbimai %}
 <hr>
-    <p>{{skelbimas}} </p>
+    <p><a href="{% url 'skelbimas' skelbimas.id %}">{{skelbimas}}</a></p>
 
 
     {% endfor %}
