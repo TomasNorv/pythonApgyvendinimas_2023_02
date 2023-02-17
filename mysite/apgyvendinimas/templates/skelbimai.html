@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Skelbimai{% endblock %}
+{% block content %}
+<ul></ul>
+ <h1>Visi skelbimai </h1>
+<ul></ul>
+  <p><b>Objektų sąrašas :</b></p>
+  {% for skelbimas in skelbimai %}
+<hr>
+    <p>{{skelbimas}} </p>
+
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Skelbimas{% endblock %}
+{% block content %}
+<ul></ul>
+<h1>Skelbimo aprašymas  </h1>
+<ul></ul>
+<p><b>Antraštė- </b>  {{ skelbimas.caption }}</p>
+<p><b>Nakvynės tipas - </b>  {{ skelbimas.type }}</p>
+<p><b>Miestas - </b> {{ skelbimas.city }}</p>
+<p><b>Plotas m2 - </b> {{ skelbimas.area }}</p>
+<p><b>Adresas - </b>  {{ skelbimas.address }}</p>
+<p><b>Tel. numeris</b>  {{ skelbimas.phone_nr }}</p>
+<p><b>Kambariai - </b> {{ skelbimas.rooms }}</p>
+<p><b>Maks. svečiai</b> -  {{ skelbimas.max_guest }}</p>
+<hr>
+<p>{{ skelbimas.description }}</p>
+<hr>
+<p><b>Patogumai</b> -  {{ skelbimas.amenities }}</p>
+
+
+{% endblock %}
