@@ -10,4 +10,5 @@ class ObjektasAdmin(admin.ModelAdmin):
     search_fields = ['type','city']
 
 
+
 admin.site.register(Objektas, ObjektasAdmin)
