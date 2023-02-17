@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Objektas
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -12,9 +13,11 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def skelbimai(request):
-    skelbimai = Objektas.objects.all()
+    paginator = Paginator(Objektas.objects.all(), 4)
+    page_number= request.GET.get("page")
+    paged_skelbimai = paginator.get_page(page_number)
     context = {
-        'skelbimai' : skelbimai
+        'skelbimai' : paged_skelbimai
     }
     return render(request, 'skelbimai.html', context=context)
 
@@ -24,3 +27,5 @@ def skelbimas(request, skelbimas_id):
         'skelbimas': skelbimas
     }
     return render(request, 'skelbimas.html', context=context)
+
+

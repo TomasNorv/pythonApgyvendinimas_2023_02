@@ -2,9 +2,13 @@
 {% block title %}Skelbimas{% endblock %}
 {% block content %}
 <ul></ul>
+<div class="text-center">
 <h1>Skelbimo aprašymas  </h1>
+</div>
 <ul></ul>
-<p><b>Antraštė- </b>  {{ skelbimas.caption }}</p>
+
+<h2><b>{{ skelbimas.caption }}</b> </h2>
+<ul></ul>
 <p><b>Nakvynės tipas - </b>  {{ skelbimas.type }}</p>
 <p><b>Miestas - </b> {{ skelbimas.city }}</p>
 <p><b>Plotas m2 - </b> {{ skelbimas.area }}</p>
@@ -12,6 +16,7 @@
 <p><b>Tel. numeris</b>  {{ skelbimas.phone_nr }}</p>
 <p><b>Kambariai - </b> {{ skelbimas.rooms }}</p>
 <p><b>Maks. svečiai</b> -  {{ skelbimas.max_guest }}</p>
+<p><b>Paros kaina eur.</b> -  {{ skelbimas.price }}</p>
 <hr>
 <p>{{ skelbimas.description }}</p>
 <hr>
