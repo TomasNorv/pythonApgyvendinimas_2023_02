@@ -16,7 +16,7 @@ class Objektas(models.Model):
     price = models.FloatField(verbose_name="Paros kaina eur")
     description = models.TextField(verbose_name='Aprašymas', max_length= 5000, null=True, blank=True, default="")
     amenities = models.TextField(verbose_name="Patogumai", max_length=5000, null=True, blank=True)
-
+    foto = models.ImageField(verbose_name='Nuotrauka',upload_to='foto', null=True, blank=True)
 
 
     def __str__(self):

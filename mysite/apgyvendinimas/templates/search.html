@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Paieškos rezultatai{% endblock %}
+{% block content %}
+
+ <h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+  </br>
+  {% if skelbimai %}
+  <ul>
+    {% for skelbimas in skelbimai %}
+      <li>
+        <a href="{{ skelbimas.id }}">{{ skelbimas.city }}</a> ({{skelbimas.type}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p> Nieko neradome :(</p>
+  {% endif %}
+{% endblock %}

@@ -2,14 +2,19 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Objektas
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # Create your views here.
 
 def index(request):
     num_objektas = Objektas.objects.all().count()
 
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
     context = {
-        'num_objektas': num_objektas,}
+        'num_objektas': num_objektas,
+        'num_visits': num_visits,
+    }
     return render(request, 'index.html', context=context)
 
 def skelbimai(request):
@@ -29,3 +34,7 @@ def skelbimas(request, skelbimas_id):
     return render(request, 'skelbimas.html', context=context)
 
 
+def search(request):
+    query = request.GET.get('query')
+    search_results = Objektas.objects.filter(Q(city__icontains=query) | Q(type__icontains=query))
+    return render(request, 'search.html', {'skelbimai': search_results, 'query': query})
