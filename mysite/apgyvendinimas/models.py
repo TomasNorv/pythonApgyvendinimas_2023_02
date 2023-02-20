@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Objektas(models.Model):
@@ -17,7 +18,7 @@ class Objektas(models.Model):
     description = models.TextField(verbose_name='Aprašymas', max_length= 5000, null=True, blank=True, default="")
     amenities = models.TextField(verbose_name="Patogumai", max_length=5000, null=True, blank=True)
     foto = models.ImageField(verbose_name='Nuotrauka',upload_to='foto', null=True, blank=True)
-
+    user = models.ForeignKey(to=User, verbose_name="Nuomotojas", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.caption

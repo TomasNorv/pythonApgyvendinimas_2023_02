@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Skelbimai{% endblock %}
+{% block content %}
+<ul></ul>
+ <h1>Mano skelbimai </h1>
+<ul></ul>
+  <p><b>Objektų sąrašas :</b></p>
+  {% for skelbimas in skelbimai %}
+<hr>
+   <p><b>{{skelbimas.caption}} - {{skelbimas.city}} </b></p>
+<p>{{skelbimas.user}}</p>
+
+
+{% endfor %}
+<div class="container puslapiai">
+    <nav aria-label="...">
+        {% if skelbimai.has_other_pages %}
+            <ul class="pagination pagination-sm justify-content-end">
+                {% for i in skelbimai.paginator.page_range %}
+                    {% if skelbimai.number == i %}
+                        <li class="page-item active">
+                            <a class="bg-success page-link">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
+</div>
+
+{% endblock %}

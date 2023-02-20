@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Objektas
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -38,3 +40,13 @@ def search(request):
     query = request.GET.get('query')
     search_results = Objektas.objects.filter(Q(city__icontains=query) | Q(type__icontains=query))
     return render(request, 'search.html', {'skelbimai': search_results, 'query': query})
+
+
+class UserObjektasListView(LoginRequiredMixin, ListView):
+    model = Objektas
+    template_name = 'user_skelbimai.html'
+    paginate_by = 4
+    context_object_name = 'skelbimai'
+
+    def get_queryset(self):
+        return Objektas.objects.filter(user=self.request.user)
