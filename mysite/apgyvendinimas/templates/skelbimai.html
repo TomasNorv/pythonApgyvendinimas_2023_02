@@ -1,16 +1,34 @@
 {% extends "base.html" %}
 {% block title %}Skelbimai{% endblock %}
 {% block content %}
+{% load static %}
 <ul></ul>
  <h1>Visi skelbimai </h1>
 <ul></ul>
   <p><b>Objektų sąrašas :</b></p>
-  {% for skelbimas in skelbimai %}
-<hr>
-    <p><a href="{% url 'skelbimas' skelbimas.id %}">{{skelbimas}}</a></p>
+{% if skelbimai %}
+    <div class="row">
+      {% for skelbimas in skelbimai %}
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if skelbimas.foto %}
+              <img src="{{ skelbimas.foto.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+               <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{ skelbimas.caption }}</h6>
+              <p class="card-text"><a href="{{ skelbimas.id }}">{{ skelbimas.type}}</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p>Bibliotekoje knygų nėra.</p>
+    {% endif %}
 
 
-    {% endfor %}
 <div class="container puslapiai">
     <nav aria-label="...">
         {% if skelbimai.has_other_pages %}

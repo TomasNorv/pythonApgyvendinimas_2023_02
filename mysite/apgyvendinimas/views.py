@@ -20,7 +20,7 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def skelbimai(request):
-    paginator = Paginator(Objektas.objects.all(), 4)
+    paginator = Paginator(Objektas.objects.all(), 6)
     page_number= request.GET.get("page")
     paged_skelbimai = paginator.get_page(page_number)
     context = {
