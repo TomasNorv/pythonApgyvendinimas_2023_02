@@ -31,4 +31,13 @@ class Objektas(models.Model):
         verbose_name_plural = 'Objektai'
 
 
+class ObjektasReview(models.Model):
+    objektas = models.ForeignKey(to='Objektas', verbose_name='Objektas', on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(to=User, verbose_name='Vartotojas', on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(verbose_name='Laikas', auto_now_add=True)
+    content = models.TextField(verbose_name='Atsiliepimas', max_length=3000)
 
+    class Meta:
+        verbose_name = "Atsiliepimas"
+        verbose_name_plural = 'Atsiliepimai'
+        ordering = ['-date_created']

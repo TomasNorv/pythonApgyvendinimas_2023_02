@@ -8,6 +8,7 @@ from django.views.generic import ListView
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
 
 # Create your views here.
 
