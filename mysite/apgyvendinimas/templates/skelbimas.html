@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 {% block title %}Skelbimas{% endblock %}
 {% block content %}
+{% load static %}
 <ul></ul>
+{% if skelbimas.foto %}
+              <img src="{{ skelbimas.foto.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
 <div class="text-center">
 <h1>Skelbimo aprašymas  </h1>
 </div>
 <ul></ul>
 
 <h2><b>{{ skelbimas.caption }}</b> </h2>
+
 <ul></ul>
 <p><b>Nakvynės tipas - </b>  {{ skelbimas.type }}</p>
 <p><b>Miestas - </b> {{ skelbimas.city }}</p>
@@ -18,9 +25,9 @@
 <p><b>Maks. svečiai</b> -  {{ skelbimas.max_guest }}</p>
 <p><b>Paros kaina eur.</b> -  {{ skelbimas.price }}</p>
 <hr>
-<p>{{ skelbimas.description }}</p>
+<p>{{ skelbimas.description | safe }}</p>
 <hr>
-<p><b>Patogumai</b> -  {{ skelbimas.amenities }}</p>
+<p><b>Patogumai</b> -  {{ skelbimas.amenities | safe }}</p>
 
 
 {% endblock %}

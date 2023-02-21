@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
+
 
 # Create your models here.
 class Objektas(models.Model):
@@ -15,7 +17,8 @@ class Objektas(models.Model):
     rooms = models.CharField(verbose_name="Kambariai", max_length=3)
     max_guest = models.CharField(verbose_name= 'Maks. svečiai', max_length= 10)
     price = models.FloatField(verbose_name="Paros kaina eur")
-    description = models.TextField(verbose_name='Aprašymas', max_length= 5000, null=True, blank=True, default="")
+    #description = models.TextField(verbose_name='Aprašymas', max_length= 5000, null=True, blank=True, default="")
+    description = HTMLField(verbose_name='Aprašymas', null=True, blank=True)
     amenities = models.TextField(verbose_name="Patogumai", max_length=5000, null=True, blank=True)
     foto = models.ImageField(verbose_name='Nuotrauka',upload_to='foto', null=True, blank=True)
     user = models.ForeignKey(to=User, verbose_name="Nuomotojas", on_delete=models.CASCADE)

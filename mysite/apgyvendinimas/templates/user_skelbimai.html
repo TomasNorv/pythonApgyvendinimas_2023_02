@@ -8,8 +8,9 @@
   {% for skelbimas in skelbimai %}
 <hr>
 <p><a href="{% url 'skelbimas' skelbimas.id %}">{{skelbimas}}</a></p>
-<p>{{skelbimas.user}}</p>
+
 {% endfor %}
+
 <div class="container puslapiai">
     <nav aria-label="...">
         {% if skelbimai.has_other_pages %}

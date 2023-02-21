@@ -8,5 +8,6 @@ urlpatterns = [
     path('skelbimai/<int:skelbimas_id>', views.skelbimas, name= 'skelbimas'),
     path('search/', views.search, name='search'),
     path('userskelbimai/', views.UserObjektasListView.as_view(), name="user_skelbimai"),
+    path('register/', views.register, name='register'),
 
 ]
