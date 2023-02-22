@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
+from datetime import date
 
 
 # Create your models here.
@@ -32,7 +33,7 @@ class Objektas(models.Model):
 
 
 class ObjektasReview(models.Model):
-    objektas = models.ForeignKey(to='Objektas', verbose_name='Objektas', on_delete=models.CASCADE)
+    objektas = models.ForeignKey(to='Objektas', verbose_name='Objektas', on_delete=models.SET_NULL, null=True, blank=True, related_name='reviews')
     reviewer = models.ForeignKey(to=User, verbose_name='Vartotojas', on_delete=models.SET_NULL, null=True, blank=True)
     date_created = models.DateTimeField(verbose_name='Laikas', auto_now_add=True)
     content = models.TextField(verbose_name='Atsiliepimas', max_length=3000)
