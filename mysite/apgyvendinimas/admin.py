@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Objektas, ObjektasReview
+from .models import Objektas, ObjektasReview, Profilis
 
 
 # Register your models here.
@@ -14,3 +14,4 @@ class ObjektasReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(Objektas, ObjektasAdmin)
 admin.site.register(ObjektasReview, ObjektasReviewAdmin)
+admin.site.register(Profilis)

@@ -42,3 +42,16 @@ class ObjektasReview(models.Model):
         verbose_name = "Atsiliepimas"
         verbose_name_plural = 'Atsiliepimai'
         ordering = ['-date_created']
+
+
+class Profilis(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    foto = models.ImageField(verbose_name= 'Nuotrauka', default="profile_pics/default.png", upload_to="profile_pics")
+
+    def __str__(self):
+        return f"{self.user.username} profilis"
+
+
+    class Meta:
+        verbose_name = "Profilis"
+        verbose_name_plural = 'Profiliai'

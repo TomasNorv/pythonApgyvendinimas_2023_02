@@ -1,15 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, reverse, get_object_or_404
 from django.http import HttpResponse
 from .models import Objektas
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.contrib.auth.models import User
-
+from django.views.generic.edit import FormMixin
+from .forms import ObjektasReviewForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -57,6 +58,29 @@ class UserObjektasListView(LoginRequiredMixin, ListView):
         return Objektas.objects.filter(user=self.request.user)
 
 
+class ObjektasDetailView(FormMixin, DetailView):
+    model = Objektas
+    template_name = 'skelbimai.html'
+    context_object_name = 'skelbimas'
+    form_class = ObjektasReviewForm
+    def get_success_url(self):
+        return reverse('skelbimas', kwargs={'pk': self.object.id})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.skelbimas = self.object
+        form.instance.reviewer = self.request.user
+        form.save()
+        return super(ObjektasDetailView, self).form_valid(form)
+
+
 @csrf_protect
 def register(request):
     if request.method == "POST":
@@ -80,3 +104,8 @@ def register(request):
             messages.error(request, 'Slaptažodžiai nesutampa!')
             return redirect('register')
     return render(request, 'register.html')
+
+
+@login_required
+def profilis(request):
+    return render(request, 'profilis.html')
