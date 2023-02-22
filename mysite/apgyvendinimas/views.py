@@ -60,7 +60,7 @@ class UserObjektasListView(LoginRequiredMixin, ListView):
 
 class ObjektasDetailView(FormMixin, DetailView):
     model = Objektas
-    template_name = 'skelbimai.html'
+    template_name = 'skelbimas.html'
     context_object_name = 'skelbimas'
     form_class = ObjektasReviewForm
     def get_success_url(self):
@@ -75,7 +75,7 @@ class ObjektasDetailView(FormMixin, DetailView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        form.instance.skelbimas = self.object
+        form.instance.objektas = self.object
         form.instance.reviewer = self.request.user
         form.save()
         return super(ObjektasDetailView, self).form_valid(form)
