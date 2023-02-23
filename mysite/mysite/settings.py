@@ -45,6 +45,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'apgyvendinimas',
     'tinymce',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,7 +70,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -171,3 +173,11 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
     }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+# CRISPY_TEMPLATE_PACK = 'uni_form'
+# CRISPY_TEMPLATE_PACK = 'foundation-5'
+
+# CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5')
