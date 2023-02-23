@@ -3,14 +3,15 @@ from django.http import HttpResponse
 from .models import Objektas
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic.edit import FormMixin
 from .forms import ObjektasReviewForm, UserUpdateForm, ProfilisUpdateForm
 from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def index(request):
@@ -91,6 +92,23 @@ class UserObjektasCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.save()
         return super().form_valid(form)
+class UserObjektasUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Objektas
+    fields = ['caption', 'type', 'city', 'address', 'street', 'housenumber', 'area', 'phone_nr', 'rooms', 'max_guest',
+              'price', 'description', 'amenities']
+    template_name = 'user_skelbimas_form.html'
+    def get_success_url(self):
+        return reverse('user_skelbimai')
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+    def test_func(self):
+        objektas = self.get_object()
+        return self.request.user == objektas.user
+
+
 
 @csrf_protect
 def register(request):
