@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Profilis{% endblock %}
 {% block content %}
-    <div class="content-section">
+{% load crispy_forms_tags %}
+ <div class="content-section"
+
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profilis.foto.url }}">
         <div class="media-body">
@@ -12,7 +14,7 @@
       </div>
       <!-- FORM HERE -->
         <form method="POST" enctype="multipart/form-data">
-           {% load crispy_forms_tags %}
+
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Profilio info</legend>
@@ -24,5 +26,5 @@
                 <button class="btn btn-success" type="submit">Atnaujinti</button>
             </div>
         </form>
-    </div>
+</div>
 {% endblock content %}

@@ -47,7 +47,7 @@ class ObjektasReview(models.Model):
 
 class Profilis(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    foto = models.ImageField(verbose_name= 'Nuotrauka', default="profile_pics/default.png", upload_to="profile_pics")
+    foto = models.ImageField(verbose_name= 'Foto', default="profile_pics/default.png", upload_to="profile_pics")
 
     def __str__(self):
         return f"{self.user.username} profilis"

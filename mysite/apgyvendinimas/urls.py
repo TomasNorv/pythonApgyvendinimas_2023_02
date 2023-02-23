@@ -10,5 +10,6 @@ urlpatterns = [
     path('userskelbimai/', views.UserObjektasListView.as_view(), name="user_skelbimai"),
     path('register/', views.register, name='register'),
     path('profilis/', views.profilis, name='profilis'),
+    path("userskelbimai/create", views.UserObjektasCreateView.as_view(), name ="user_skelbimas_create"),
 
 ]

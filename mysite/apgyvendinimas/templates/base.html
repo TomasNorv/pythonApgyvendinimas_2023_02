@@ -35,7 +35,7 @@
 
  {% if user.is_authenticated %}
 
-        <li class="nav-item"><a class="nav-link" href="">Įdėti skelbimą</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'user_skelbimas_create' %}">Įdėti skelbimą</a></li>
       <li class="nav-item"><a class="nav-link" href="{% url 'user_skelbimai' %}">Mano skelbimai</a></li>
 
          <li class="nav-item"><a class="nav-link" href="{% url 'profilis' %}">
@@ -62,6 +62,7 @@
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'info' %}success{% endif %}" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ message }}
         </div>
     {% endfor %}

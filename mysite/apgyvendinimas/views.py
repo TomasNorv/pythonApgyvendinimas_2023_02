@@ -4,7 +4,7 @@ from .models import Objektas
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -80,6 +80,17 @@ class ObjektasDetailView(FormMixin, DetailView):
         form.save()
         return super(ObjektasDetailView, self).form_valid(form)
 
+
+class UserObjektasCreateView(LoginRequiredMixin, CreateView):
+    model = Objektas
+    fields = ['caption', 'type', 'city', 'address', 'street', 'housenumber', 'area', 'phone_nr', 'rooms', 'max_guest', 'price', 'description', 'amenities']
+    template_name = 'user_skelbimas_form.html'
+    def get_success_url(self):
+        return reverse('user_skelbimai')
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
 
 @csrf_protect
 def register(request):
