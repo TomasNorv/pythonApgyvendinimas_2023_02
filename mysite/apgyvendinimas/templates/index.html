@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}HOME{% endblock %}
 
 {% block content %}
 <ul></ul>
-<p><b>Šiuo metu objektų yra : </b></p>
+<p><b>{% trans "Currently, there are objects" %} : </b></p>
 <ul>
-    <li><b>Objektai :</b> {{ num_objektas }} </li>
+    <li><b>{% trans "Objects" %} :</b> {{ num_objektas }} </li>
 </ul>
-<p>Čia jūs lankotes {{ num_visits }}-ą kartą.</p>
+<p>{% trans "Your visits:" %} {{ num_visits }}</p>
 {% endblock %}

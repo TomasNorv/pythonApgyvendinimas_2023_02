@@ -1,16 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Įdėti skelbimą{% endblock %}
+{% load i18n %}
+{% block title %}Insert Ad{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4"><b>Sukurti skelbimą/redaguoti</b></legend>
+            <legend class="border-bottom mb-4"><h1><b>{% trans "Create ad/edit" %}</b></h1></legend>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-success btn-sm mt-1 mb-1 " type="submit">Išsaugoti</button>
+            <button class="btn btn-success btn-sm mt-1 mb-1 " type="submit">{% trans "Save" %}</button>
         </div>
     </form>
     </div>

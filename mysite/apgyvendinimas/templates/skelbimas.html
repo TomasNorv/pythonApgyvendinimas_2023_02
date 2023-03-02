@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Skelbimas{% endblock %}
+{% load i18n %}
+{% block title %}Ad{% endblock %}
 {% block content %}
 {% load static %}
 <ul></ul>
@@ -9,34 +10,35 @@
               <img src="{% static 'img/no-image.png' %}" class="card-img-top">
             {% endif %}
 <div class="text-center">
-<h1>Skelbimo aprašymas  </h1>
+<h1>{% trans "Ad description" %}  </h1>
 </div>
 <ul></ul>
 
 <h2><b>{{ skelbimas.caption }}</b> </h2>
 
 <ul></ul>
-<p><b>Nakvynės tipas - </b>  {{ skelbimas.type }}</p>
-<p><b>Miestas - </b> {{ skelbimas.city }}</p>
-<p><b>Plotas m2 - </b> {{ skelbimas.area }}</p>
-<p><b>Adresas - </b>  {{ skelbimas.address }}</p>
-<p><b>Tel. numeris</b>  {{ skelbimas.phone_nr }}</p>
-<p><b>Kambariai - </b> {{ skelbimas.rooms }}</p>
-<p><b>Maks. svečiai</b> -  {{ skelbimas.max_guest }}</p>
-<p><b>Paros kaina eur.</b> -  {{ skelbimas.price }}</p>
+<p><b>{% trans "Type" %} - </b>  {{ skelbimas.type }}</p>
+<p><b>{% trans "City" %} - </b> {{ skelbimas.city }}</p>
+<p><b>{% trans "Area m2" %} - </b> {{ skelbimas.area }}</p>
+<p><b>{% trans "Address" %} - </b>  {{ skelbimas.address }}</p>
+<p><b>{% trans "Phone nr" %}</b>  {{ skelbimas.phone_nr }}</p>
+<p><b>{% trans "Rooms" %} - </b> {{ skelbimas.rooms }}</p>
+<p><b>{% trans "Max quest" %}</b> -  {{ skelbimas.max_guest }}</p>
+<p><b>{% trans "Daily price eur" %}.</b> -  {{ skelbimas.price }}</p>
 <hr>
 <p>{{ skelbimas.description | safe }}</p>
 <hr>
-<p><b>Patogumai</b> -  {{ skelbimas.amenities | safe }}</p>
+<p><b>{% trans "Amenities" %}</b> -  {{ skelbimas.amenities | safe }}</p>
 
 {% if skelbimas.user == user %}
             <div>
-                <a class="btn btn-warning btn-sm mt-1 mb-1" href="{% url 'user_skelbimas_update' skelbimas.id %}">Redaguoti</a>
+                <a class="btn btn-warning btn-sm mt-1 mb-1" href="{% url 'user_skelbimas_update' skelbimas.id %}">{% trans "Edit" %}</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'user_skelbimas_delete' skelbimas.id %}">{% trans "Delete" %}</a>
             </div>
             {% endif %}
 
 </br>
-  <h4>Atsiliepimai:</h4>
+  <h4>{% trans "Reviews" %}:</h4>
   {% if skelbimas.reviews.all %}
     {% for review in skelbimas.reviews.all %}
       <hr>
@@ -44,17 +46,17 @@
       <p>{{ review.content }}</p>
     {% endfor %}
   {% else %}
-    <p>Objektas neturi atsiliepimų</p>
+    <p>{% trans "Object has no reviews" %}</p>
   {% endif %}
 
 {% if user.is_authenticated %}
   <div class="fieldWrapper">
     <hr><br/>
-    <h4>Palikite atsiliepimą:</h4>
+    <h4>{% trans "Leave a review" %}:</h4>
     <form action="" method="post">
       {% csrf_token %}
       {{ form.content }}</br>
-      <input type="submit" class="btn btn-success btn-sm mt-1 mb-1" value="Išsaugoti">
+      <input type="submit" class="btn btn-success btn-sm mt-1 mb-1" value="{% blocktrans %} Save {% endblocktrans %}">
     </form>
   </div>
 

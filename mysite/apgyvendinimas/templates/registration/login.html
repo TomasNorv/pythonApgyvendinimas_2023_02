@@ -1,15 +1,16 @@
 {% extends "base.html" %}
-{% block title %}Prisijungimas{% endblock %}
+{% load i18n %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
 <br>
   {% if form.errors %}
-    <p><b>Prisijungimo klaida, bandykite dar kartą!</b></p>
+    <p><b>{% trans "Sign-in error, try again" %}!</b></p>
   {% endif %}
   
   {% if next %}
     {% if user.is_authenticated %}
-      <p>Neturite prieigos prie šios informacijos. Turite prisijungti.</p>
+      <p>{% trans "You do not have access to this information. You need to log in" %}.</p>
     {% endif %}
   {% endif %}
   <br>
@@ -17,20 +18,20 @@
     {% csrf_token %}
     <table>
       <tr>
-        <td>Vartotojas: </td>
+        <td>{% trans "User" %}: </td>
         <td><input class="form-control" {{ form.username }}</td>
       </tr>
       <tr>
-        <td>Slaptažodis: </td>
+        <td>{% trans "Password" %}: </td>
         <td><input class="form-control" {{ form.password }}</td>
       </tr>
 
     </table>
      <br>
-    <input type="submit" class="btn btn-success" value="Prisijungti" />
+    <input type="submit" class="btn btn-success" value="{% blocktrans %} Login {% endblocktrans %}" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
   
-  <p><a href="{% url 'password_reset' %}">Pamiršote slaptažodį?</a></p>
+  <p><a href="{% url 'password_reset' %}">{% trans "Forgot your password" %}?</a></p>
   
 {% endblock %}

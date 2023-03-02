@@ -1,15 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Skelbimai{% endblock %}
+{% load i18n %}
+{% block title %}User Ads{% endblock %}
 {% block content %}
 <ul></ul>
- <h1>Mano skelbimai </h1>
+ <h1>{% trans "My Ads" %} </h1>
 <ul></ul>
-  <p><b>Objektų sąrašas :</b></p>
+  <p><b>{% trans "Object list" %} :</b></p>
+  {% if skelbimai %}
   {% for skelbimas in skelbimai %}
 <hr>
 <p><a href="{% url 'skelbimas' skelbimas.id %}">{{skelbimas}}</a></p>
 
-{% endfor %}
+     {% endfor %}
+  {% else %}
+      <p>{% trans "No objects" %}.</p>
+  {% endif %}
 
  <div class="container puslapiai">
     <span class="step-links">

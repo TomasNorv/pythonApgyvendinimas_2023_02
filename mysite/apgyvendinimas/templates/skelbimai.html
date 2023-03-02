@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Skelbimai{% endblock %}
+{% load i18n %}
+{% block title %}Ads{% endblock %}
 {% block content %}
 {% load static %}
 <ul></ul>
- <h1>Visi skelbimai </h1>
+ <h1>{% trans "All ads" %}</h1>
 <ul></ul>
-  <p><b>Objektų sąrašas :</b></p>
+  <p><b>{% trans "Object list" %}:</b></p>
 {% if skelbimai %}
     <div class="row">
       {% for skelbimas in skelbimai %}
@@ -25,7 +26,7 @@
       {% endfor %}
     </div>
     {% else %}
-      <p>Objektų nėra.</p>
+      <p>{% trans "Object is not found!" %}</p>
     {% endif %}
 
 
