@@ -138,8 +138,8 @@ def register(request):
                     return redirect('register')
                 else:
                     User.objects.create_user(username=username, email=email, password=password)
-                    #messages.info(request, f'Vartotojas {username} užregistruotas!')
-                    messages.info(request, _('User %s registered!') % username)
+                    #messages.success(request, f'Vartotojas {username} užregistruotas!')
+                    messages.success(request, _('User %s registered!') % username)
                     return redirect('login')
         else:
             #messages.error(request, 'Slaptažodžiai nesutampa!')

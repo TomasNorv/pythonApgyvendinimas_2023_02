@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load i18n %}
   <title>{% block title %}{% endblock %}</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -18,8 +19,8 @@
  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-houses" viewBox="0 0 16 16">
   <path d="M5.793 1a1 1 0 0 1 1.414 0l.647.646a.5.5 0 1 1-.708.708L6.5 1.707 2 6.207V12.5a.5.5 0 0 0 .5.5.5.5 0 0 1 0 1A1.5 1.5 0 0 1 1 12.5V7.207l-.146.147a.5.5 0 0 1-.708-.708L5.793 1Zm3 1a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Zm.707.707L5 7.207V13.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V7.207l-4.5-4.5Z"/>
 </svg>
-  <h1>Apgyvendinimo paslaugos</h1>
-  <p>Išsirink kur apsistoti!</p>
+  <h1>{% trans "Accommodation services" %}</h1>
+  <p>{% trans "Choose where to stay" %}!</p>
 
 </div>
 
@@ -29,34 +30,34 @@
 
 
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'index' %}">Pradžia</a>
+        <a class="nav-link" href="{% url 'index' %}">{% trans "Home" %}</a>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'visi_skelbimai' %}">Visi skelbimai </a>
+        <a class="nav-link" href="{% url 'visi_skelbimai' %}">{% trans "All Ads" %} </a>
 
  {% if user.is_authenticated %}
 
-        <li class="nav-item"><a class="nav-link" href="{% url 'user_skelbimas_create' %}">Įdėti skelbimą</a></li>
-      <li class="nav-item"><a class="nav-link" href="{% url 'user_skelbimai' %}">Mano skelbimai</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'user_skelbimas_create' %}">{% trans "Add new advert" %}</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'user_skelbimai' %}">{% trans "My Ads" %}</a></li>
 
          <li class="nav-item"><a class="nav-link" href="{% url 'profilis' %}">
               <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
               </svg>
               {{ user.get_username }}</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">Atsijungti</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">{% trans "Logout" %}</a></li>
           {% else %}
 
-            <li class="nav-item"><a class="nav-link" href="{% url 'login'%}">Prisijungti</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">Registruotis</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'login'%}">{% trans "Login" %}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">{% trans "Register" %}</a></li>
 
           {% endif %}
 <li>
     <form action="{% url 'search' %} " method="get" class="form-inline my-2 my-md-0">
-    <input name="query" class="form-control" type="text" placeholder="Paieška">
+    <input name="query" class="form-control" type="text" placeholder="{% blocktrans %} Search {% endblocktrans %}">
     </form>
 </li>
  <li> {% load i18n %}
-    <li class="nav-item nav-link" >
+    <li class="nav-item nav-link " >
       <form action="{% url 'set_language' %}" method="post" >
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}"/>
@@ -83,7 +84,6 @@
     {% for message in messages %}
         <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% endif %}" role="alert">
                 {{ message }}
-
         </div>
     {% endfor %}
 {% endif %}
